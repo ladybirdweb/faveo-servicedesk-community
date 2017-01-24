@@ -2,7 +2,7 @@ Faveo Helpdesk Community
 ========
 <br><img src="https://travis-ci.org/ladybirdweb/faveo-helpdesk.svg?branch=master">&nbsp;<img src="https://img.shields.io/badge/License-OSL-blue.svg">&nbsp;<a href="https://gitter.im/ladybirdweb/faveo-helpdesk" target="_blank"><img src="https://badges.gitter.im/ladybirdweb/faveo-helpdesk.svg"></a>&nbsp;<a href="https://styleci.io/repos/34716238"><img src="https://styleci.io/repos/34716238/shield" alt="StyleCI" height="19px"></a>&nbsp;<a href="http://squizlabs.github.io/PHP_CodeSniffer/analysis/ladybirdweb/faveo-helpdesk/index.html" target="_blank"><img src="http://squizlabs.github.io/PHP_CodeSniffer/analysis/ladybirdweb/faveo-helpdesk/grade.svg" height="20px"></a>&nbsp;<a href="https://scrutinizer-ci.com/g/ladybirdweb/faveo-helpdesk/?branch=master" target="_blank"><img src="https://scrutinizer-ci.com/g/mverma16/faveo-helpdesk/badges/quality-score.png?b=master" height="20px"></a></br>
 
-Faveo Service Desk provides Businesses with an automated Helpdesk system to manage customer support with IT asset management. 
+Faveo Service Desk provides Businesses with an automated IT Helpdesk system with asset management. 
 
 Faveo has been integrated with multiple platforms and new features being added each month.
 
@@ -77,12 +77,7 @@ Create your own fork of Faveo master repositoray and use <a href="https://github
 
 Help
 --------------------------
-Visit the <a href="https://github.com/ladybirdweb/faveo-helpdesk/issues">issue</a> page. And if you'd like professional help commercial support is available, email us through the <a href="http://www.faveohelpdesk.com/contact-us/">contact form</a>.
-
-Download Faveo mobile apps
---------------------------
-
-<a href='https://play.google.com/store/apps/details?id=co.helpdesk.faveo&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' target="_blank"><img alt='Get it on Google Play' src='http://www.faveohelpdesk.com/wp-content/uploads/2016/12/google-1.png'  width="200px"/></a> <a href="https://appsto.re/in/cTjQgb.i" target="_blank"><img src="http://www.faveohelpdesk.com/wp-content/uploads/2016/12/apple.png"  width="200px"/></a>
+Visit the <a href="https://github.com/ladybirdweb/faveo-servicedesk-community/issues">issue</a> page. And if you'd like professional help commercial support is available, email us through the <a href="http://www.faveohelpdesk.com/contact-us/">contact form</a>.
 
 
 Follow Us
