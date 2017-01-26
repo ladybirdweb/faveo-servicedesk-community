@@ -1,0 +1,126 @@
+@extends('themes.default1.agent.layout.agent')
+@section('content')
+
+<section class="content-heading-anchor">
+    <h2>
+        {{Lang::get('itil::lang.new_problem')}}  
+
+
+    </h2>
+
+</section>
+
+
+<!-- Main content -->
+
+<div class="box box-primary">
+    <div class="box-header with-border">
+        <h4> {{Lang::get('itil::lang.open_new_problem')}}  </h4>
+        @if (count($errors) > 0)
+        <div class="alert alert-danger">
+            <strong>Whoops!</strong> There were some problems with your input.<br><br>
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
+
+        @if(Session::has('success'))
+        <div class="alert alert-success alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{Session::get('success')}}
+        </div>
+        @endif
+        <!-- fail message -->
+        @if(Session::has('fails'))
+        <div class="alert alert-danger alert-dismissable">
+            <i class="fa fa-ban"></i>
+            <b>{{Lang::get('message.alert')}}!</b> {{Lang::get('message.failed')}}.
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            {{Session::get('fails')}}
+        </div>
+        @endif
+        {!! Form::open(['url'=>'service-desk/problem/create','method'=>'post','files'=>true]) !!}
+    </div><!-- /.box-header -->
+    <!-- form start -->
+
+    <!--<form action="{!!URL::route('service-desk.problem.postcreate')!!}"  method="post" role="form">-->
+    <div class="box-body">
+
+        <div class="row">
+            <!--<div class="col-md-6">-->
+             
+            <div class="form-group col-md-6 {{ $errors->has('subject') ? 'has-error' : '' }} ">
+                <label class="control-label">{{Lang::get('itil::lang.subject')}}</label>
+                {!! Form::text('subject',null,['class'=>'form-control']) !!}
+                <!--<input type="text" class="form-control" name="subject" id="inputPassword3" value="From">-->
+            </div>
+            <div class="form-group col-md-6 {{ $errors->has('from') ? 'has-error' : '' }}">
+                <label for="inputPassword3" class="control-label">{{Lang::get('itil::lang.from')}}</label>
+                {!! Form::select('from',$from,null,['class'=>'form-control','placeholder'=>'Email address']) !!}
+                <!--<input type="text" class="form-control" name="from" id="inputPassword3" value="From">-->
+            </div>
+            <div class="form-group col-md-6 {{ $errors->has('department') ? 'has-error' : '' }}">
+                <label class="control-label">{{Lang::get('itil::lang.department')}}</label>
+                {!! Form::select('department',$departments,null,['class'=>'form-control']) !!}
+                <!--<input type="text" class="form-control" name="department" id="inputPassword3" value="Department">-->
+
+            </div>  
+            <div class="form-group col-md-6 {{ $errors->has('impact_id') ? 'has-error' : '' }}">
+                <label class="control-label">{{Lang::get('itil::lang.impact')}}</label>
+                {!! Form::select('impact_id',$impact_ids,null,['class'=>'form-control']) !!}
+            </div>
+
+            <div class="form-group col-md-6 {{ $errors->has('status_type_id') ? 'has-error' : '' }}">
+                <label class="control-label">{{Lang::get('itil::lang.status')}}</label>
+                {!! Form::select('status_type_id',$status_type_ids,null,['class'=>'form-control']) !!}
+            </div>
+            <div class="form-group col-md-6 {{ $errors->has('location_type_id') ? 'has-error' : '' }}">
+                <label class="control-label">{{Lang::get('itil::lang.location_type_id')}}</label>
+                {!! Form::select('location_type_id',$location_type_ids,null,['class'=>'form-control']) !!}
+            </div>
+            <div class="form-group col-md-6 {{ $errors->has('priority_id') ? 'has-error' : '' }}">
+                <label class="control-label">{{Lang::get('itil::lang.priority')}}</label>
+                {!! Form::select('priority_id',$priority_ids,null,['class'=>'form-control']) !!}
+            </div>
+            <div class="form-group col-md-6 {{ $errors->has('group') ? 'has-error' : '' }}">
+                <label class="control-label">{{Lang::get('itil::lang.select_group')}}</label>
+                {!! Form::select('group',$group_ids,null,['class'=>'form-control']) !!}
+            </div>
+            <div class="form-group col-md-6{{ $errors->has('assigned') ? 'has-error' : '' }}">
+                <label class="control-label">{{Lang::get('itil::lang.assigned-to')}}</label>
+                {!! Form::select('assigned',$assigned_ids,null,['class'=>'form-control']) !!}
+            </div>
+            @if(isAsset()==true)
+            <div class="form-group col-md-6{{ $errors->has('assets') ? 'has-error' : '' }}">
+                <label class="control-label">{{Lang::get('itil::lang.attach-asset')}}</label>
+                {!! Form::select('asset',null,['class'=>'form-control']) !!}
+            </div>
+            @endif
+            <div class="form-group col-md-12 {{ $errors->has('description') ? 'has-error' : '' }}">
+                <label for="internal_notes" class="control-label">{{Lang::get('itil::lang.description')}}</label>
+                {!! Form::textarea('description',null,['class'=>'form-control','id'=>'description']) !!}
+                <!--<textarea class="form-control textarea" placeholder="Description" name="description" rows="7" id="" style="width: 97%; margin-left:14px;"></textarea>-->
+            </div>
+            <div class="form-group col-md-6{{ $errors->has('attachment') ? 'has-error' : '' }}">
+                <label class="control-label">{{Lang::get('itil::lang.attachment')}}</label>
+                {!! Form::file('attachment[]',['multiple'=>true]) !!}
+            </div>
+        </div>   
+        <!--</div>-->
+        <!--/row-->
+    </div>
+    <div class="box box-footer">
+        {!! Form::submit(Lang::get('itil::lang.problem-add'),['class'=>'btn btn-success']) !!}
+        {!! Form::close() !!}
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#description").wysihtml5();
+    });
+</script>
+<!-- team lead -->
+@stop
