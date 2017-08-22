@@ -28,7 +28,7 @@ class UserNotification extends BaseModel
         return $this->belongsTo($related, $id);
     }
 
-//    public function delete() {
+    //    public function delete() {
 //        //$this->notification()->delete();
 //        parent::delete();
 //    }

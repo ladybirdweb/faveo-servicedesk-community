@@ -1,6 +1,9 @@
 <?php
+
 // namespace App;
+
 namespace App\Plugins\ServiceDesk\Model\Assets;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Users extends Model

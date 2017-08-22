@@ -2,8 +2,8 @@
 
 namespace App\Plugins\ServiceDesk\database\seeds;
 
-use Illuminate\Database\Seeder;
 use DB;
+use Illuminate\Database\Seeder;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,9 +11,10 @@ use DB;
  * and open the template in the editor.
  */
 
-class SdProductStatus extends Seeder {
-
-    public function run() {
+class SdProductStatus extends Seeder
+{
+    public function run()
+    {
         $created_at = date('Y-d-m H:m:i');
         $updated_at = date('Y-d-m H:m:i');
 
@@ -33,5 +34,4 @@ class SdProductStatus extends Seeder {
                     'updated_at' => $updated_at,
         ]);
     }
-
 }

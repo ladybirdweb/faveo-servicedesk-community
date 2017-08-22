@@ -2,13 +2,13 @@
 
 namespace App\Plugins\ServiceDesk\database\seeds;
 
-use Illuminate\Database\Seeder;
 use DB;
+use Illuminate\Database\Seeder;
 
-class SdAssetTypeSeeder extends Seeder {
-
-    public function run() {
-
+class SdAssetTypeSeeder extends Seeder
+{
+    public function run()
+    {
         $types = [['name' => 'Services', 'parent_id' => ''],
             ['name' => 'Cloud', 'parent_id' => ''],
             ['name' => 'Hardware', 'parent_id' => ''],
@@ -58,10 +58,9 @@ class SdAssetTypeSeeder extends Seeder {
             $updated_at = date('Y-d-m H:m:i');
             if ($types[$i]) {
                 DB::table('sd_asset_types')->insert(['id' => $n, 'name' => $types[$i]['name'], 'parent_id' => $types[$i]['parent_id'],
-                    'created_at' => $created_at, 'updated_at' => $updated_at,
+                    'created_at'                          => $created_at, 'updated_at' => $updated_at,
                 ]);
             }
         }
     }
-
 }

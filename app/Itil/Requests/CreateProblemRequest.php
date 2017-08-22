@@ -4,14 +4,15 @@ namespace App\Itil\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateProblemRequest extends Request {
-
+class CreateProblemRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -20,14 +21,15 @@ class CreateProblemRequest extends Request {
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
 
-            'from' => 'required|email',           
-            'description' => 'required',
-            'department' => 'required',
+            'from'           => 'required|email',
+            'description'    => 'required',
+            'department'     => 'required',
             'status_type_id' => 'required',
-            'subject'=>'required',
+            'subject'        => 'required',
 //            'priority_id' => 'required',
 //            'impact_id' => 'required',
 //            'location_type_id' => 'required',
@@ -37,21 +39,21 @@ class CreateProblemRequest extends Request {
                 ];
     }
 
-    public function messages() {
+    public function messages()
+    {
         return [
 
-            "from.required" => "From Required",
-            
-            "description.required" => "Description Required",
-            "department.required" => "Department Required",
-            "status_type_id.required" => "Status Type Required",
-            "priority_id.required" => "Priority Required",
-            "impact_id.required" => "impact Required",
-            "location_type_id.required" => "Location Type required",
-            "group_id.required" => "Group Required",
-            "agent_id.required" => "Agent Required",
-            "assigned_id.required" => "Assigned Required",
+            'from.required' => 'From Required',
+
+            'description.required'      => 'Description Required',
+            'department.required'       => 'Department Required',
+            'status_type_id.required'   => 'Status Type Required',
+            'priority_id.required'      => 'Priority Required',
+            'impact_id.required'        => 'impact Required',
+            'location_type_id.required' => 'Location Type required',
+            'group_id.required'         => 'Group Required',
+            'agent_id.required'         => 'Agent Required',
+            'assigned_id.required'      => 'Assigned Required',
         ];
     }
-
 }

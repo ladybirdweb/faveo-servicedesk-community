@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSdContractsTable extends Migration
 {
@@ -26,8 +26,8 @@ class CreateSdContractsTable extends Migration
             $table->integer('license_type_id')->unsigned()->nullable();
             $table->foreign('license_type_id')->references('id')->on('sd_license_types');
             $table->integer('licensce_count');
-//            $table->integer('attachment')->unsigned();
-//            $table->foreign('attachment')->references('id')->on('sd_attachments');
+            //            $table->integer('attachment')->unsigned();
+            //            $table->foreign('attachment')->references('id')->on('sd_attachments');
             $table->integer('product_id')->unsigned()->nullable();
             $table->foreign('product_id')->references('id')->on('sd_products');
             $table->timestamp('notify_expiry')->nullable();

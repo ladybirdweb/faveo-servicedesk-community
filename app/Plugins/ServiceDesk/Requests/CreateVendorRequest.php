@@ -4,14 +4,15 @@ namespace App\Plugins\ServiceDesk\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateVendorRequest extends Request {
-
+class CreateVendorRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -20,17 +21,17 @@ class CreateVendorRequest extends Request {
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         return [
 
-             'name' => 'required',
+             'name'           => 'required',
             'primary_contact' => 'required',
-            'email' => 'required',
+            'email'           => 'required',
 //            'description' => 'required',
             'address' => 'required',
 //            'all_department' => 'required',
             'status' => 'required',
         ];
     }
-
 }

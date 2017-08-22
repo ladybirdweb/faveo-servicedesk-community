@@ -1,64 +1,59 @@
 <?php
+
 if (itilEnabled() == true && !view()->exists('service::assets.index')) {
-    Route::group(['prefix' => 'service-desk', 'middleware' => ['web', 'auth']], function() {
-
-        \Event::listen('service.desk.agent.sidebar.replace', function() {
-            
+    Route::group(['prefix' => 'service-desk', 'middleware' => ['web', 'auth']], function () {
+        \Event::listen('service.desk.agent.sidebar.replace', function () {
             return 0;
         });
-        \Event::listen('service.desk.agent.topbar.replace', function() {
-
+        \Event::listen('service.desk.agent.topbar.replace', function () {
             return 1;
         });
 
-        \Event::listen('service.desk.admin.sidebar.replace', function() {
-
+        \Event::listen('service.desk.admin.sidebar.replace', function () {
             return 1;
         });
-        \Event::listen('service.desk.admin.topbar.replace', function() {
-
+        \Event::listen('service.desk.admin.topbar.replace', function () {
             return 0;
         });
 
-        \Event::listen('service.desk.agent.sidebar', function() {
+        \Event::listen('service.desk.agent.sidebar', function () {
             $controller = new App\Itil\Controllers\InterfaceController();
             echo $controller->agentSidebar();
         });
 
-        \Event::listen('service.desk.agent.topbar', function() {
+        \Event::listen('service.desk.agent.topbar', function () {
             $controller = new App\Itil\Controllers\InterfaceController();
             echo $controller->agentTopbar();
         });
-        \Event::listen('service.desk.agent.topsubbar', function() {
+        \Event::listen('service.desk.agent.topsubbar', function () {
             $controller = new App\Itil\Controllers\InterfaceController();
             echo $controller->agentTopSubbar();
         });
 
-        \Event::listen('service.desk.admin.sidebar', function() {
+        \Event::listen('service.desk.admin.sidebar', function () {
             $controller = new App\Itil\Controllers\InterfaceController();
             echo $controller->adminSidebar();
         });
 
-        \Event::listen('service.desk.admin.topbar', function() {
+        \Event::listen('service.desk.admin.topbar', function () {
             $controller = new App\Itil\Controllers\InterfaceController();
             echo $controller->adminTopbar();
         });
-        \Event::listen('service.desk.admin.topsubbar', function() {
+        \Event::listen('service.desk.admin.topsubbar', function () {
             $controller = new App\Itil\Controllers\InterfaceController();
             echo $controller->adminTopSubbar();
         });
 
-        \Event::listen('service.desk.admin.settings', function() {
+        \Event::listen('service.desk.admin.settings', function () {
             $controller = new App\Itil\Controllers\InterfaceController();
             echo $controller->adminSettings();
         });
-        \Event::listen('App\Events\TicketDetailTable', function($event) {
+        \Event::listen('App\Events\TicketDetailTable', function ($event) {
             $controller = new App\Itil\Controllers\InterfaceController();
             echo $controller->ticketDetailTable($event);
         });
 
-
-        /**
+        /*
          * Release Managing Module
          */
         Route::get('releases', ['as' => 'service-desk.releases.index', 'uses' => 'App\Itil\Controllers\RelesesController@releasesindex']);
@@ -71,7 +66,7 @@ if (itilEnabled() == true && !view()->exists('service::assets.index')) {
         Route::get('get-releases', ['as' => 'service-desk.releases.get', 'uses' => 'App\Itil\Controllers\RelesesController@getReleases']);
         Route::get('releases/{id}/complete', ['as' => 'service-desk.releases.view', 'uses' => 'App\Itil\Controllers\RelesesController@complete']);
 
-        /**
+        /*
          * Changes Managing Module
          */
         Route::get('changes', ['as' => 'service-desk.changes.index', 'uses' => 'App\Itil\Controllers\ChangesController@changesindex']);
@@ -88,10 +83,7 @@ if (itilEnabled() == true && !view()->exists('service::assets.index')) {
         Route::post('changes/release/attach/{id}', ['as' => 'change.release.attach', 'uses' => 'App\Itil\Controllers\ChangesController@attachExistingRelease']);
         Route::get('changes/{changeid}/detach', ['as' => 'change.release.detach', 'uses' => 'App\Itil\Controllers\ChangesController@detachRelease']);
 
-
-
-
-        /**
+        /*
          * Problem Managing Module
          */
         Route::get('problems', ['as' => 'service-desk.problem.index', 'uses' => 'App\Itil\Controllers\ProblemController@index']);
@@ -112,7 +104,7 @@ if (itilEnabled() == true && !view()->exists('service::assets.index')) {
         Route::post('problem/change/attach/{id}', ['as' => 'problem.change.attach', 'uses' => 'App\Itil\Controllers\ProblemController@attachExistingChange']);
         Route::get('problem/{problemid}/detach', ['as' => 'problem.change.detach', 'uses' => 'App\Itil\Controllers\ProblemController@detachChange']);
 
-        /**
+        /*
          * Location Catagory Managing Module
          */
         Route::get('location-category-types', ['as' => 'service-desk.location-category.index', 'uses' => 'App\Itil\Controllers\LocationCategoryController@index']);
@@ -123,7 +115,7 @@ if (itilEnabled() == true && !view()->exists('service::assets.index')) {
         Route::get('location-category-types/{id}/delete', ['as' => 'service-desk.location-category.delet', 'uses' => 'App\Itil\Controllers\LocationCategoryController@handledelete']);
         Route::get('get-location-category-types', ['as' => 'service-desk.location-category.get', 'uses' => 'App\Itil\Controllers\LocationCategoryController@getLocation']);
 
-        /**
+        /*
          * Location Managing Module
          */
         Route::get('location-types', ['as' => 'service-desk.location.index', 'uses' => 'App\Itil\Controllers\LocationController@index']);
@@ -136,7 +128,7 @@ if (itilEnabled() == true && !view()->exists('service::assets.index')) {
         Route::get('location-types/{id}/show', ['as' => 'service-desk.location.show', 'uses' => 'App\Itil\Controllers\LocationController@show']);
         Route::get('location/org', ['as' => 'org.location', 'uses' => 'App\Itil\Controllers\LocationController@getLocationsForForm']);
 
-        /**
+        /*
          * Cab
          */
         Route::resource('cabs', 'App\Itil\Controllers\CabController');
@@ -145,7 +137,7 @@ if (itilEnabled() == true && !view()->exists('service::assets.index')) {
         Route::post('cabs/vote/{cabid}/{owner}', ['as' => 'cabs.post.vote', 'uses' => 'App\Itil\Controllers\CabController@postVote']);
         Route::get('cabs/{cabid}/{owner}/show', ['as' => 'cabs.vote.show', 'uses' => 'App\Itil\Controllers\CabController@showVotes']);
 
-        /**
+        /*
          * Common
          */
         Route::get('cabs/{cabid}/{owner}/show', ['as' => 'cabs.vote.show', 'uses' => 'App\Itil\Controllers\CabController@showVotes']);
@@ -155,4 +147,3 @@ if (itilEnabled() == true && !view()->exists('service::assets.index')) {
         Route::get('general/{owner}/{identifier}/delete', ['as' => 'attach.delete', 'uses' => 'App\Itil\Controllers\InterfaceController@deleteGeneralByIdentifier']);
     });
 }
-

@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSdAssetsTable extends Migration
 {
@@ -37,7 +37,6 @@ class CreateSdAssetsTable extends Migration
             $table->timestamp('assigned_on');
             $table->timestamps();
         });
-        
     }
 
     /**

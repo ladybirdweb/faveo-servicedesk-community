@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Plugins\ServiceDesk\Model\Assets;
+
 use Illuminate\Database\Eloquent\Model;
 
 class AssetForm extends Model

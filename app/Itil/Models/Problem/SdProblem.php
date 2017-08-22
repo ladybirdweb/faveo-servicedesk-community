@@ -4,35 +4,39 @@ namespace App\Itil\Models\Problem;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SdProblem extends Model {
-
+class SdProblem extends Model
+{
     protected $table = 'sd_problem';
     protected $fillable = ['id', 'from', 'name', 'subject', 'description', 'status_type_id', 'priority_id', 'impact_id', 'location_type_id', 'group_id', 'agent_id', 'assigned_id',
         'department',
     ];
 
     /**
-     * get the requester/from
+     * get the requester/from.
+     *
      * @return string
      */
-    public function requesters() {
-        $value = "--";
+    public function requesters()
+    {
+        $value = '--';
         $attr = $this->attributes['from'];
         if ($attr) {
             $users = new \App\User();
             $user = $users->where('email', $attr)->first();
             if ($user) {
                 $value = "$user->first_name $user->last_name";
-                if ($value == " ") {
+                if ($value == ' ') {
                     $value = $user->user_name;
                 }
             }
         }
+
         return $value;
     }
 
-    public function organization() {
-        $value = "--";
+    public function organization()
+    {
+        $value = '--';
         $attr = $this->attributes['from'];
         if ($attr) {
             $users = new \App\User();
@@ -41,14 +45,17 @@ class SdProblem extends Model {
                 $value = $user->getOrgWithLink();
             }
         }
+
         return $value;
     }
 
     /**
-     * get the assets
+     * get the assets.
+     *
      * @return type
      */
-    public function assets() {
+    public function assets()
+    {
         $ids = [];
         if (isAsset() == true) {
             $table = $this->table;
@@ -61,11 +68,13 @@ class SdProblem extends Model {
                 $ids = $relation->asset_ids;
             }
         }
+
         return $ids;
     }
 
-    public function getAssets() {
-        $assets = "";
+    public function getAssets()
+    {
+        $assets = '';
         if (isAsset() == true) {
             $ids = $this->assets();
             $asset = new \App\Itil\Models\Assets\SdAssets();
@@ -73,21 +82,24 @@ class SdProblem extends Model {
                 foreach ($ids as $id) {
                     $ass = $asset->find($id);
                     if ($ass) {
-                        $value = "<a href=" . url('service-desk/assets/' . $id . '/show') . ">" . ucfirst($ass->name) . "</a>";
-                        $assets .=$value . "</br>";
+                        $value = '<a href='.url('service-desk/assets/'.$id.'/show').'>'.ucfirst($ass->name).'</a>';
+                        $assets .= $value.'</br>';
                     }
                 }
             }
         }
+
         return $assets;
     }
 
     /**
-     * get the status name
+     * get the status name.
+     *
      * @return string
      */
-    public function statuses() {
-        $value = "--";
+    public function statuses()
+    {
+        $value = '--';
         $status = $this->attributes['status_type_id'];
         if ($status) {
             $statuses = $this->belongsTo('App\Model\helpdesk\Ticket\Ticket_Status', 'status_type_id')->first();
@@ -95,15 +107,18 @@ class SdProblem extends Model {
                 $value = $statuses->name;
             }
         }
+
         return ucfirst($value);
     }
 
     /**
-     * get the department name
+     * get the department name.
+     *
      * @return string
      */
-    public function departments() {
-        $value = "--";
+    public function departments()
+    {
+        $value = '--';
         $attr = $this->attributes['department'];
         if ($attr) {
             $attrs = $this->belongsTo('App\Model\helpdesk\Agent\Department', 'department')->first();
@@ -111,15 +126,18 @@ class SdProblem extends Model {
                 $value = $attrs->name;
             }
         }
+
         return ucfirst($value);
     }
 
     /**
-     * get the impact name
+     * get the impact name.
+     *
      * @return string
      */
-    public function impacts() {
-        $value = "--";
+    public function impacts()
+    {
+        $value = '--';
         $attr = $this->attributes['impact_id'];
         //dd()
         if ($attr) {
@@ -128,32 +146,38 @@ class SdProblem extends Model {
                 $value = $attrs->name;
             }
         }
+
         return ucfirst($value);
     }
 
     /**
-     * get the location name
+     * get the location name.
+     *
      * @return string
      */
-    public function locations() {
-        $value = "--";
+    public function locations()
+    {
+        $value = '--';
         $attr = $this->attributes['location_type_id'];
         if ($attr) {
             $attrs = $this->belongsTo('App\Itil\Models\Problem\Location', 'location_type_id')->first();
             //dd($attrs);
             if ($attrs) {
-                $value = "<a href=" . url('service-desk/location-types/' . $attr . '/show') . ">$attrs->title</a>";
+                $value = '<a href='.url('service-desk/location-types/'.$attr.'/show').">$attrs->title</a>";
             }
         }
+
         return ucfirst($value);
     }
 
     /**
-     * get the priority name
+     * get the priority name.
+     *
      * @return string
      */
-    public function prioritys() {
-        $value = "--";
+    public function prioritys()
+    {
+        $value = '--';
         $attr = $this->attributes['priority_id'];
         //dd($attr);
         if ($attr) {
@@ -162,15 +186,18 @@ class SdProblem extends Model {
                 $value = $attrs->priority;
             }
         }
+
         return ucfirst($value);
     }
 
     /**
-     * get the group name
-     * @return string 
+     * get the group name.
+     *
+     * @return string
      */
-    public function groups() {
-        $value = "--";
+    public function groups()
+    {
+        $value = '--';
         $attr = $this->attributes['group_id'];
         if ($attr) {
             $attrs = $this->belongsTo('App\Model\helpdesk\Agent\Groups', 'group_id')->first();
@@ -178,15 +205,18 @@ class SdProblem extends Model {
                 $value = $attrs->name;
             }
         }
+
         return ucfirst($value);
     }
 
     /**
-     * get the assigned agent/admin email
+     * get the assigned agent/admin email.
+     *
      * @return string
      */
-    public function assigneds() {
-        $value = "--";
+    public function assigneds()
+    {
+        $value = '--';
         $attr = $this->attributes['assigned_id'];
         if ($attr) {
             $attrs = $this->belongsTo('App\User', 'assigned_id')->first();
@@ -194,38 +224,45 @@ class SdProblem extends Model {
                 $value = $attrs->email;
             }
         }
+
         return ucfirst($value);
     }
 
     /**
-     * get the description of this model
-     * @return string 
+     * get the description of this model.
+     *
+     * @return string
      */
-    public function descriptions() {
-        $value = "--";
+    public function descriptions()
+    {
+        $value = '--';
         $attr = $this->attributes['description'];
         if ($attr) {
             $value = str_limit($attr, 10);
         }
         if (strlen($value) > 10) {
-            $value .="  <a href=# id='show-description'>Show</a>";
+            $value .= "  <a href=# id='show-description'>Show</a>";
         }
+
         return ucfirst($value);
     }
 
-    public function attachments() {
+    public function attachments()
+    {
         $table = $this->table;
         $id = $this->attributes['id'];
         $owner = "$table:$id";
         $attachments = new \App\Itil\Models\Common\Attachments();
         $attachment = $attachments->where('owner', $owner)->get();
+
         return $attachment;
     }
 
     /**
-     * detach the problem fro relation table
+     * detach the problem fro relation table.
      */
-    public function detachRelation() {
+    public function detachRelation()
+    {
         $relation = new \App\Itil\Models\Common\TicketRelation();
         $table = $this->table;
         $id = $this->attributes['id'];
@@ -240,32 +277,39 @@ class SdProblem extends Model {
         }
     }
 
-    public function changeRelaion() {
+    public function changeRelaion()
+    {
         $through = "App\Itil\Models\Problem\ProblemChangeRelation";
         $firstKey = 'problem_id';
+
         return $this->hasMany($through, $firstKey);
     }
 
-    public function change() {
+    public function change()
+    {
         $relation = $this->changeRelaion()->first();
         if ($relation) {
             $changeid = $relation->change_id;
             $changes = new \App\Itil\Models\Changes\SdChanges();
             $change = $changes->find($changeid);
+
             return $change;
         }
     }
 
     /**
-     * delete the attachment
+     * delete the attachment.
+     *
      * @param int $id
      */
-    public function deleteAttachment($id) {
+    public function deleteAttachment($id)
+    {
         $table = $this->table;
         \App\Itil\Controllers\UtilityController::deleteAttachments($id, $table);
     }
 
-    public function delete() {
+    public function delete()
+    {
         $id = $this->id;
         $this->deleteAttachment($id);
         $this->detachRelation();
@@ -273,50 +317,57 @@ class SdProblem extends Model {
         parent::delete();
     }
 
-//    public function general(){
-//        $general = new \App\Itil\Models\Common\GeneralInfo();
-//        $table = $this->table;
-//        $id  = $this->attributes['id'];
-//        $owner = "$table:$id";
-//        $generals = $general->where('owner',$owner)->lists('value','key')->toArray();
-//        return $generals;
-//    }
+    //    public function general(){
+    //        $general = new \App\Itil\Models\Common\GeneralInfo();
+    //        $table = $this->table;
+    //        $id  = $this->attributes['id'];
+    //        $owner = "$table:$id";
+    //        $generals = $general->where('owner',$owner)->lists('value','key')->toArray();
+    //        return $generals;
+    //    }
 
-    public function generalAttachments($identifier) {
+    public function generalAttachments($identifier)
+    {
         $table = $this->table;
         $id = $this->attributes['id'];
         //$identifier = "root-cause";
         $owner = "$table:$identifier:$id";
         $attachment = new \App\Itil\Models\Common\Attachments();
         $attachments = $attachment->where('owner', $owner)->get();
+
         return $attachments;
     }
 
-    public function getGeneralByIdentifier($identifier) {
+    public function getGeneralByIdentifier($identifier)
+    {
         $table = $this->table;
         $id = $this->attributes['id'];
         $owner = "$table:$id";
         $generals = new \App\Itil\Models\Common\GeneralInfo();
         $general = $generals->where('owner', $owner)->where('key', $identifier)->first();
+
         return $general;
     }
 
-    public function table() {
+    public function table()
+    {
         return $this->table;
     }
 
-    public function tickets() {
-
+    public function tickets()
+    {
         $ticket = $this->ticketRelation();
         $join = $ticket->join('ticket_thread', 'tickets.id', '=', 'ticket_thread.ticket_id')
                 ->select('tickets.id', 'tickets.ticket_number', 'ticket_thread.title')
                 ->whereNotNull('ticket_thread.title')
                 ->groupBy('tickets.id')
                 ->get();
+
         return $join;
     }
 
-    public function ticketRelation() {
+    public function ticketRelation()
+    {
         $problemid = $this->attributes['id'];
         $table = $this->table;
         $owner = "$table:$problemid";
@@ -324,14 +375,16 @@ class SdProblem extends Model {
         $relation = $ticket_relation->where('owner', $owner)->lists('ticket_id')->toArray();
         $ticket = new \App\Itil\Models\Common\Ticket();
         $tickets = $ticket->whereIn('tickets.id', $relation);
+
         return $tickets;
     }
 
-    public function subject() {
+    public function subject()
+    {
         $id = $this->attributes['id'];
         $title = $this->attributes['subject'];
-        $subject = "<a href=" . url('service-desk/problem/' . $id . '/show') . ">" . $title . "</a>";
+        $subject = '<a href='.url('service-desk/problem/'.$id.'/show').'>'.$title.'</a>';
+
         return $subject;
     }
-
 }
