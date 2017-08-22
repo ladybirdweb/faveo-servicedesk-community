@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Plugins\ServiceDesk\Model\Changes;
+
 use Illuminate\Database\Eloquent\Model;
 
 class ChangeReleaseRelation extends Model

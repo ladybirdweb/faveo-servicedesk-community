@@ -13,7 +13,6 @@ use App\User;
 use Auth;
 // classes
 use Illuminate\Http\Request;
-use Input;
 use Lang;
 
 /**
@@ -33,7 +32,7 @@ class ClientTicketController extends Controller
         $this->TicketWorkflowController = $TicketWorkflowController;
         // $this->middleware('auth');
         // $this->middleware('role.user');
-         $this->middleware('board');
+        $this->middleware('board');
     }
 
     /**

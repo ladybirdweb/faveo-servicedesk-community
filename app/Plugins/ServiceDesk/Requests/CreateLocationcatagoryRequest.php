@@ -4,14 +4,15 @@ namespace App\Plugins\ServiceDesk\Requests;
 
 use App\Http\Requests\Request;
 
-class CreateLocationcatagoryRequest extends Request {
-
+class CreateLocationcatagoryRequest extends Request
+{
     /**
      * Determine if the user is authorized to make this request.
      *
      * @return bool
      */
-    public function authorize() {
+    public function authorize()
+    {
         return true;
     }
 
@@ -20,11 +21,12 @@ class CreateLocationcatagoryRequest extends Request {
      *
      * @return array
      */
-    public function rules() {
+    public function rules()
+    {
         $id = $this->segment(3);
+
         return [
-            'name' => 'required|unique:sd_location_categories,name,' . $id
+            'name' => 'required|unique:sd_location_categories,name,'.$id,
         ];
     }
-
 }

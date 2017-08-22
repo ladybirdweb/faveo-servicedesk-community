@@ -2,8 +2,8 @@
 
 namespace App\Itil\database\seeds;
 
-use Illuminate\Database\Seeder;
 use DB;
+use Illuminate\Database\Seeder;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,9 +11,10 @@ use DB;
  * and open the template in the editor.
  */
 
-class SdReleaseType extends Seeder {
-
-    public function run() {
+class SdReleaseType extends Seeder
+{
+    public function run()
+    {
         $created_at = date('Y-d-m H:m:i');
         $updated_at = date('Y-d-m H:m:i');
 
@@ -37,7 +38,5 @@ class SdReleaseType extends Seeder {
                     'created_at' => $created_at,
                     'updated_at' => $updated_at,
         ]);
-        
     }
-
 }

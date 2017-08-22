@@ -10,7 +10,6 @@ use App\Model\helpdesk\Settings\Security;
 // Request
 use Illuminate\Http\Request;
 // Class
-use Input;
 use Lang;
 use Redirect;
 
@@ -64,10 +63,10 @@ class SecurityController extends Controller
      *
      * @return Response
      */
-//    public function show($id)
-//    {
-//        return view('themes.default1.admin.helpdesk.setting.security.preview', compact('id'));
-//    }
+    //    public function show($id)
+    //    {
+    //        return view('themes.default1.admin.helpdesk.setting.security.preview', compact('id'));
+    //    }
 
     /**
      * Update security details.

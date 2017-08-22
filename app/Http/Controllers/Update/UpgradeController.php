@@ -183,11 +183,11 @@ class UpgradeController extends Controller
             echo '<ul class=list-unstyled>';
             $directory = "$this->dir/UPDATES";
             $destination = $this->dir;
-//        $destination = "/Applications/AMPPS/www/test/new";
+            //        $destination = "/Applications/AMPPS/www/test/new";
             $directories = \File::directories($directory);
 
-//        echo "current directory => $directory <br>";
-//        echo "Destination Directory => $destination <br>";
+            //        echo "current directory => $directory <br>";
+            //        echo "Destination Directory => $destination <br>";
             foreach ($directories as $source) {
                 $success = \File::copyDirectory($source, $destination);
                 echo '<li class="success">&raquo; </li>';
@@ -251,7 +251,7 @@ class UpgradeController extends Controller
 
             return redirect('dashboard')->with('fails', 'Could not find latest realeases from repository.');
 
-//            else {
+            //            else {
 //                return redirect()->back();
 //            }
         } catch (Exception $ex) {
@@ -273,7 +273,7 @@ class UpgradeController extends Controller
     {
         if (Utility::getFileVersion() < Utility::getDatabaseVersion()) {
             $latest_version = $this->getLatestVersion();
-//            dd($latest_version);
+            //            dd($latest_version);
             $current_version = Utility::getFileVersion();
             //dd($current_version);
             if ($latest_version != '') {

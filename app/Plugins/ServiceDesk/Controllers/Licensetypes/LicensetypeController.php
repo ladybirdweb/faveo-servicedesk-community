@@ -7,9 +7,10 @@ use App\Plugins\ServiceDesk\Model\Contract\License;
 use App\Plugins\ServiceDesk\Requests\CreateLicensetypesRequest;
 use Exception;
 
-class LicensetypeController extends BaseServiceDeskController {
-
-    public function index() {
+class LicensetypeController extends BaseServiceDeskController
+{
+    public function index()
+    {
         try {
             return view('service::licensetypes.index');
         } catch (Exception $ex) {
@@ -17,14 +18,16 @@ class LicensetypeController extends BaseServiceDeskController {
         }
     }
 
-    public function getLicense() {
+    public function getLicense()
+    {
         try {
             $license_types = new License();
             $license_type = $license_types->select('id', 'name', 'created_at', 'updated_at')->get();
+
             return \Datatable::Collection($license_type)
                             ->showColumns('name', 'created_at', 'updated_at')
-                            ->addColumn('action', function($model) {
-                                return "<a href=" . url('service-desk/license-types/' . $model->id . '/edit') . " class='btn btn-info btn-xs'>Edit</a>";
+                            ->addColumn('action', function ($model) {
+                                return '<a href='.url('service-desk/license-types/'.$model->id.'/edit')." class='btn btn-info btn-xs'>Edit</a>";
                             })
                             ->searchColumns('name', 'created_at', 'updated_at')
                             ->orderColumns('name', 'created_at', 'updated_at')
@@ -34,7 +37,8 @@ class LicensetypeController extends BaseServiceDeskController {
         }
     }
 
-    public function create() {
+    public function create()
+    {
         try {
             return view('service::licensetypes.create');
         } catch (Exception $ex) {
@@ -42,53 +46,61 @@ class LicensetypeController extends BaseServiceDeskController {
         }
     }
 
-    public function handleCreate(CreateLicensetypesRequest $request) {
+    public function handleCreate(CreateLicensetypesRequest $request)
+    {
         try {
-            $sd_licensetypes = new License;
+            $sd_licensetypes = new License();
             $sd_licensetypes->fill($request->input())->save();
+
             return \Redirect::route('service-desk.licensetypes.index')->with('message', 'License Types successfully create !!!');
         } catch (Exception $ex) {
             return redirect()->back()->with('fails', $ex->getMessage());
         }
     }
 
-    public function edit($id) {
+    public function edit($id)
+    {
         try {
             $licensetype = License::findOrFail($id);
             if ($licensetype) {
                 return view('service::licensetypes.edit', compact('licensetype'));
             }
-            throw new Exception("We can not find your request");
+
+            throw new Exception('We can not find your request');
         } catch (Exception $ex) {
             return redirect()->back()->with('fails', $ex->getMessage());
         }
     }
 
-    public function handleEdit($id, CreateLicensetypesRequest $request) {
+    public function handleEdit($id, CreateLicensetypesRequest $request)
+    {
         try {
             $sd_licensetypes = License::findOrFail($id);
             if ($sd_licensetypes) {
                 $sd_licensetypes->fill($request->input())->save();
+
                 return \Redirect::route('service-desk.licensetypes.index')->with('message', 'License Types successfully Edit !!!');
             }
-            throw new Exception("We can not find your request");
+
+            throw new Exception('We can not find your request');
         } catch (Exception $ex) {
             return redirect()->back()->with('fails', $ex->getMessage());
         }
     }
 
-    public function handledelete($id) {
+    public function handledelete($id)
+    {
         try {
-
             $sd_licensetypes = License::findOrFail($id);
             if ($sd_licensetypes) {
                 $sd_licensetypes->delete();
+
                 return \Redirect::route('service-desk.licensetypes.index')->with('message', 'License Types successfully delete !!!');
             }
-            throw new Exception("We can not find your request");
+
+            throw new Exception('We can not find your request');
         } catch (Exception $ex) {
             return redirect()->back()->with('fails', $ex->getMessage());
         }
     }
-
 }

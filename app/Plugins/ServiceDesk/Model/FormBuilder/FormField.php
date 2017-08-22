@@ -4,8 +4,8 @@ namespace App\Plugins\ServiceDesk\Model\FormBuilder;
 
 use Illuminate\Database\Eloquent\Model;
 
-class FormField extends Model {
-
+class FormField extends Model
+{
     protected $table = 'sd_form_fields';
     protected $fillable = [
         'name',
@@ -20,14 +20,15 @@ class FormField extends Model {
         'multiple',
         'role',
     ];
-    
-    public function fieldValue(){
-        return $this->hasMany('App\Plugins\ServiceDesk\Model\FormBuilder\FormValue','field_id');
+
+    public function fieldValue()
+    {
+        return $this->hasMany('App\Plugins\ServiceDesk\Model\FormBuilder\FormValue', 'field_id');
     }
-    
-    public function delete() {
+
+    public function delete()
+    {
         $this->fieldValue()->delete();
         parent::delete();
     }
-
 }

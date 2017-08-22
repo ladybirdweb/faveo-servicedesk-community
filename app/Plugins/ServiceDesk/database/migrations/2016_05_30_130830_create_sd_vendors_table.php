@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateSdVendorsTable extends Migration
 {
@@ -19,7 +19,7 @@ class CreateSdVendorsTable extends Migration
             $table->string('email');
             $table->string('description');
             $table->string('address');
-//            $table->boolean('all_department');
+            //            $table->boolean('all_department');
             $table->boolean('status');
             $table->timestamps();
         });

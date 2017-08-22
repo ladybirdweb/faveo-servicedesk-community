@@ -61,6 +61,7 @@ class ApiController extends Controller
 
         $this->middleware('jwt.auth');
         $this->middleware('api', ['except' => 'GenerateApiKey']);
+
         try {
             $user = \JWTAuth::parseToken()->authenticate();
             $this->user = $user;
@@ -293,7 +294,7 @@ class ApiController extends Controller
     {
         try {
             //            $result = $this->model->where('status', '=', 1)->where('isanswered', '=', 0)->where('assigned_to', '=', null)->orderBy('id', 'DESC')->get();
-//            return response()->json(compact('result'));
+            //            return response()->json(compact('result'));
 
             $result = $this->user->join('tickets', function ($join) {
                 $join->on('users.id', '=', 'tickets.user_id')
@@ -338,8 +339,8 @@ class ApiController extends Controller
     {
         try {
             //dd('sdhjbc');
-//            $result = $this->model->where('assigned_to', '=', null)->where('status', '1')->orderBy('id', 'DESC')->get();
-//            return response()->json(compact('result'));
+            //            $result = $this->model->where('assigned_to', '=', null)->where('status', '1')->orderBy('id', 'DESC')->get();
+            //            return response()->json(compact('result'));
             $user = \JWTAuth::parseToken()->authenticate();
             $unassigned = $this->user->join('tickets', function ($join) {
                 $join->on('users.id', '=', 'tickets.user_id')
@@ -389,7 +390,7 @@ class ApiController extends Controller
     {
         try {
             //            $result = $this->model->where('status', '>', 1)->where('status', '<', 4)->orderBy('id', 'DESC')->get();
-//            return response()->json(compact('result'));
+            //            return response()->json(compact('result'));
             $user = \JWTAuth::parseToken()->authenticate();
             $result = $this->user->join('tickets', function ($join) {
                 $join->on('users.id', '=', 'tickets.user_id')
@@ -1092,7 +1093,7 @@ class ApiController extends Controller
             $result = $this->user->join('tickets', function ($join) use ($id) {
                 $join->on('users.id', '=', 'tickets.assigned_to')
                         ->where('status', '=', 1);
-                        //->where('user_id', '=', $id);
+                //->where('user_id', '=', $id);
             })
                     ->join('department', 'department.id', '=', 'tickets.dept_id')
                     ->join('ticket_priority', 'ticket_priority.priority_id', '=', 'tickets.priority_id')
@@ -1288,6 +1289,7 @@ class ApiController extends Controller
     public function collaboratorSearch()
     {
         $this->validate($this->request, ['term' => 'required']);
+
         try {
             $emails = $this->ticket->autosearch();
             //return $emails;

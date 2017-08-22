@@ -201,11 +201,11 @@ class TicketWorkflowController extends Controller
         } elseif ($condition == 'ends') {
             $return = $this->checkEnds($statement, $to_check);
         }
-//        elseif($condition == 'match') {
-//
-//        } elseif($condition == 'not_match') {
-//
-//        }
+        //        elseif($condition == 'match') {
+        //
+        //        } elseif($condition == 'not_match') {
+        //
+        //        }
         return $return;
     }
 
@@ -312,15 +312,15 @@ class TicketWorkflowController extends Controller
         }
     }
 
-//    function startsWith($to_check, $statement) {
-//        // search backwards starting from haystack length characters from the end
-//        return $statement === "" || strrpos($to_check, $statement, -strlen($to_check)) !== false;
-//    }
+    //    function startsWith($to_check, $statement) {
+    //        // search backwards starting from haystack length characters from the end
+    //        return $statement === "" || strrpos($to_check, $statement, -strlen($to_check)) !== false;
+    //    }
 
-//    function endsWith($to_check, $statement) {
-//        // search forward starting from end minus needle length characters
-//        return $statement === "" || (($temp = strlen($to_check) - strlen($statement)) >= 0 && strpos($to_check, $statement, $temp) !== false);
-//    }
+    //    function endsWith($to_check, $statement) {
+    //        // search forward starting from end minus needle length characters
+    //        return $statement === "" || (($temp = strlen($to_check) - strlen($statement)) >= 0 && strpos($to_check, $statement, $temp) !== false);
+    //    }
 
     /**
      * function to apply the action to a ticket.

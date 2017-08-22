@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Plugins\ServiceDesk\Model\Cab;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Cab extends Model
@@ -12,27 +13,27 @@ class Cab extends Model
         'approvers',
         'aproval_mandatory',
         ];
-    
-    public function setApproversAttribute($value){
-        if($value){
+
+    public function setApproversAttribute($value)
+    {
+        if ($value) {
             $this->attributes['approvers'] = implode(',', $value);
         }
     }
-    
-    public function getApproversAttribute($value){
-        if($value){
+
+    public function getApproversAttribute($value)
+    {
+        if ($value) {
             return explode(',', $value);
         }
     }
-    
-    public function setHeadAttribute($value){
-        if($value==""){
-            $this->attributes['head'] = NULL;
-        }else{
+
+    public function setHeadAttribute($value)
+    {
+        if ($value == '') {
+            $this->attributes['head'] = null;
+        } else {
             $this->attributes['head'] = $value;
         }
     }
-    
-    
-    
 }
