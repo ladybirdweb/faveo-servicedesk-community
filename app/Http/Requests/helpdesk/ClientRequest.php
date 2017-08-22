@@ -147,7 +147,7 @@ class ClientRequest extends Request
         }
     }
 
-//    public function purifyArray($array){
+    //    public function purifyArray($array){
 //        $purified = [];
 //        foreach($array as $key=>$value){
 //            if(!is_array($value)){

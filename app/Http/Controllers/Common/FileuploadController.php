@@ -35,7 +35,7 @@ class FileuploadController extends Controller
         }
 
         return ['0' => $max_size_in_bytes, '1' => $max_size_in_actual];
-//        return $max_size_in_bytes;
+        //        return $max_size_in_bytes;
     }
 
     public function parse_size($size)

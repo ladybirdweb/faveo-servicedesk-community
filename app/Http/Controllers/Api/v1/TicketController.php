@@ -326,16 +326,16 @@ class TicketController extends Controller
             }
             \Event::fire(new \App\Events\FaveoAfterReply($reply_content, $user->phone_number, $request, $tickets));
 
-//             Mail::send(array('html' => 'emails.ticket_re-reply'), ['content' => $reply_content, 'ticket_number' => $ticket_number, 'From' => $company, 'name' => $username, 'Agent_Signature' => $agentsign], function ($message) use ($email, $user_name, $ticket_number, $ticket_subject, $check_attachment) {
-//                 $message->to($email, $user_name)->subject($ticket_subject . '[#' . $ticket_number . ']');
-//                 // if(isset($attachments)){
-// //                if ($check_attachment == 1) {
-// //                    $size = count($attach);
-// //                    for ($i = 0; $i < $size; $i++) {
-// //                        $message->attach($attachments[$i]->getRealPath(), ['as' => $attachments[$i]->getClientOriginalName(), 'mime' => $attachments[$i]->getClientOriginalExtension()]);
-// //                    }
-// //                }
-//             }, true);
+            //             Mail::send(array('html' => 'emails.ticket_re-reply'), ['content' => $reply_content, 'ticket_number' => $ticket_number, 'From' => $company, 'name' => $username, 'Agent_Signature' => $agentsign], function ($message) use ($email, $user_name, $ticket_number, $ticket_subject, $check_attachment) {
+            //                 $message->to($email, $user_name)->subject($ticket_subject . '[#' . $ticket_number . ']');
+            //                 // if(isset($attachments)){
+            // //                if ($check_attachment == 1) {
+            // //                    $size = count($attach);
+            // //                    for ($i = 0; $i < $size; $i++) {
+            // //                        $message->attach($attachments[$i]->getRealPath(), ['as' => $attachments[$i]->getClientOriginalName(), 'mime' => $attachments[$i]->getClientOriginalExtension()]);
+            // //                    }
+            // //                }
+            //             }, true);
             //dd('reply');
             /*
              * Getting the subject of the thread
@@ -359,15 +359,15 @@ class TicketController extends Controller
                 } else {
                     $collab_user_name = $user_id_collab->first_name.' '.$user_id_collab->last_name;
                 }
-//                 Mail::send('emails.ticket_re-reply', ['content' => $reply_content, 'ticket_number' => $ticket_number, 'From' => $company, 'name' => $collab_user_name, 'Agent_Signature' => $agentsign], function ($message) use ($collab_email, $collab_user_name, $ticket_number, $ticket_subject, $check_attachment) {
-//                     $message->to($collab_email, $collab_user_name)->subject($ticket_subject . '[#' . $ticket_number . ']');
-// //                    if ($check_attachment == 1) {
-// //                        $size = sizeOf($attachments);
-// //                        for ($i = 0; $i < $size; $i++) {
-// //                            $message->attach($attachments[$i]->getRealPath(), ['as' => $attachments[$i]->getClientOriginalName(), 'mime' => $attachments[$i]->getClientOriginalExtension()]);
-// //                        }
-// //                    }
-//                 }, true);
+                //                 Mail::send('emails.ticket_re-reply', ['content' => $reply_content, 'ticket_number' => $ticket_number, 'From' => $company, 'name' => $collab_user_name, 'Agent_Signature' => $agentsign], function ($message) use ($collab_email, $collab_user_name, $ticket_number, $ticket_subject, $check_attachment) {
+                //                     $message->to($collab_email, $collab_user_name)->subject($ticket_subject . '[#' . $ticket_number . ']');
+                // //                    if ($check_attachment == 1) {
+                // //                        $size = sizeOf($attachments);
+                // //                        for ($i = 0; $i < $size; $i++) {
+                // //                            $message->attach($attachments[$i]->getRealPath(), ['as' => $attachments[$i]->getClientOriginalName(), 'mime' => $attachments[$i]->getClientOriginalExtension()]);
+                // //                        }
+                // //                    }
+                //                 }, true);
 
                 try {
                     $this->PhpMailController->sendmail($from = $this->PhpMailController->mailfrom('0', $ticketdata->dept_id), $to = ['user' => $admin_user, 'email' => $admin_email], $message = ['subject' => $updated_subject, 'body' => $body, 'scenario' => $mail], $template_variables = ['ticket_agent_name' => $admin_user, 'ticket_client_name' => $username, 'ticket_client_email' => $emailadd, 'user' => $admin_user, 'ticket_number' => $ticket_number2, 'email_address' => $emailadd, 'name' => $ticket_creator]);
@@ -713,6 +713,7 @@ class TicketController extends Controller
             return $collab;
         } catch (\Exception $ex) {
             return $ex->getMessage();
+
             throw new \Exception('get collaborator for ticket fails');
         }
     }

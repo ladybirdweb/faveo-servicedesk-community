@@ -29,6 +29,7 @@ class TicketRequest extends Request
     public function rules()
     {
         $error = '';
+
         try {
             $size = $this->size();
             if ($size > 800 || $size == 0) {
@@ -38,7 +39,7 @@ class TicketRequest extends Request
             dd($ex);
             $error = $this->error($ex);
         }
-//        return [
+        //        return [
 //            'attachment' => 'not_in:'.$error,
 //        ];
     }

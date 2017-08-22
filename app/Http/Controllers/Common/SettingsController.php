@@ -119,6 +119,7 @@ class SettingsController extends Controller
         $widget = $widgets->where('id', '=', $id)->first();
         $widget->title = $request->title;
         $widget->value = $request->content;
+
         try {
             $widget->save();
 
@@ -196,6 +197,7 @@ class SettingsController extends Controller
         $widget = $widgets->where('id', '=', $id)->first();
         $widget->title = $request->title;
         $widget->value = $request->content;
+
         try {
             $widget->save();
 
@@ -232,6 +234,7 @@ class SettingsController extends Controller
         $data->name = $request->input('name');
         $data->email = $request->input('email');
         $data->password = Crypt::encrypt($request->input('password'));
+
         try {
             $data->save();
 
@@ -255,6 +258,7 @@ class SettingsController extends Controller
         $pass = $request->input('password');
         $password = Crypt::encrypt($pass);
         $settings->password = $password;
+
         try {
             $settings->save();
         } catch (Exception $e) {
@@ -268,6 +272,7 @@ class SettingsController extends Controller
             $settings->logo = $fileName;
             $settings->save();
         }
+
         try {
             $settings->fill($request->except('logo', 'password'))->save();
 
@@ -362,6 +367,7 @@ class SettingsController extends Controller
     public function PostPlugins(Request $request)
     {
         $this->validate($request, ['plugin' => 'required|mimes:application/zip,zip,Zip']);
+
         try {
             if (!extension_loaded('zip')) {
                 throw new Exception('Please enable zip extension in your php');

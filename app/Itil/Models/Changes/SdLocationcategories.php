@@ -4,17 +4,20 @@ namespace App\Itil\Models\Changes;
 
 use Illuminate\Database\Eloquent\Model;
 
-class SdLocationcategories extends Model {
-
+class SdLocationcategories extends Model
+{
     protected $table = 'sd_location_categories';
     protected $fillable = ['id', 'name', 'parent_id', 'created_at', 'updated_at'];
 
-    public function locations() {
+    public function locations()
+    {
         $related = 'App\Itil\Models\Common\Location';
+
         return $this->hasMany($related, 'location_category_id');
     }
 
-    public function categoryDeleteFromLocation() {
+    public function categoryDeleteFromLocation()
+    {
         $locations = $this->locations()->get();
         //dd($locations);
         if ($locations->count() > 0) {
@@ -25,9 +28,9 @@ class SdLocationcategories extends Model {
         }
     }
 
-    public function delete() {
+    public function delete()
+    {
         $this->categoryDeleteFromLocation();
         parent::delete();
     }
-
 }

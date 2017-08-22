@@ -1,20 +1,21 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
 use App\Model\Common\Template;
-use App\Model\Common\TemplateType;
 use App\Model\Common\TemplateSet;
+use App\Model\Common\TemplateType;
+use Illuminate\Database\Migrations\Migration;
 use Illuminate\Support\Facades\DB;
 
-class CreateSdAddTemplateTable extends Migration {
-
+class CreateSdAddTemplateTable extends Migration
+{
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up() {
-//        $setid = '1';
+    public function up()
+    {
+        //        $setid = '1';
 //        $sets = new TemplateSet();
 //        $types = new TemplateType();
 //        $template = new Template();
@@ -38,14 +39,16 @@ class CreateSdAddTemplateTable extends Migration {
 //            'set_id'=>$setid,
 //        ]);
     }
-    
-    public function message(){
+
+    public function message()
+    {
         $message = '<p>Hi&nbsp;{!!$name!!},</p>
                         <p>We need you opinion for an action.</p>
                         <p>Please give your vote and valuable suggestions,</p>
                         <p>For voting please <a href="{!!$system_link!!}">click here</a>.</p>
                         <p>Thank you,</p>
                         <p>{!!$system_from!!}.</p>';
+
         return $message;
     }
 
@@ -54,8 +57,8 @@ class CreateSdAddTemplateTable extends Migration {
      *
      * @return void
      */
-    public function down() {
+    public function down()
+    {
         //
     }
-
 }

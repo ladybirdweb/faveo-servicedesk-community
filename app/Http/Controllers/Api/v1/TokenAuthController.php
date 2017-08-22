@@ -47,7 +47,7 @@ class TokenAuthController extends Controller
         $password = $request->input('password');
         $field = filter_var($usernameinput, FILTER_VALIDATE_EMAIL) ? 'email' : 'user_name';
 
-//$credentials = $request->only('email', 'password');
+        //$credentials = $request->only('email', 'password');
 
         try {
             if (!$token = JWTAuth::attempt([$field => $usernameinput, 'password' => $password, 'active'=>1])) {
@@ -62,7 +62,7 @@ class TokenAuthController extends Controller
         }
 
         $user_id = \Auth::user()->id;
-// if no errors are encountered we can return a JWT
+        // if no errors are encountered we can return a JWT
         return response()->json(compact('token', 'user_id'));
     }
 
@@ -89,7 +89,7 @@ class TokenAuthController extends Controller
 
             return response()->json(compact('error'));
         }
-//dd($user);
+        //dd($user);
         return response()->json(compact('user'));
     }
 
@@ -100,30 +100,30 @@ class TokenAuthController extends Controller
      *
      * @return type json
      */
-//    public function register(Request $request)
-//    {
-//        try {
-//            $v = \Validator::make($request->all(), [
-//                        'email'    => 'required|email|unique:users',
-//                        'password' => 'required',
-//            ]);
-//            if ($v->fails()) {
-//                $error = $v->errors();
-//
-//                return response()->json(compact('error'));
-//            }
-//            $newuser = $request->all();
-//            $password = Hash::make($request->input('password'));
-//
-//            $newuser['password'] = $password;
-//
-//            return User::create($newuser);
-//        } catch (\Exception $e) {
-//            $error = $e->getMessage();
-//
-//            return response()->json(compact('error'));
-//        }
-//    }
+    //    public function register(Request $request)
+    //    {
+    //        try {
+    //            $v = \Validator::make($request->all(), [
+    //                        'email'    => 'required|email|unique:users',
+    //                        'password' => 'required',
+    //            ]);
+    //            if ($v->fails()) {
+    //                $error = $v->errors();
+    //
+    //                return response()->json(compact('error'));
+    //            }
+    //            $newuser = $request->all();
+    //            $password = Hash::make($request->input('password'));
+    //
+    //            $newuser['password'] = $password;
+    //
+    //            return User::create($newuser);
+    //        } catch (\Exception $e) {
+    //            $error = $e->getMessage();
+    //
+    //            return response()->json(compact('error'));
+    //        }
+    //    }
 
     /**
      * verify the url is existing or not.
@@ -172,7 +172,7 @@ class TokenAuthController extends Controller
                 $password_reset_table = \DB::table('password_resets')->where('email', '=', $user->email)->first();
                 if (isset($password_reset_table)) {
                     $password_reset_table = \DB::table('password_resets')->where('email', '=', $user->email)->update(['token' => $code, 'created_at' => $date]);
-                // $password_reset_table->token = $code;
+                    // $password_reset_table->token = $code;
                 // $password_reset_table->update(['token' => $code]);
                 } else {
                     $create_password_reset = \DB::table('password_resets')->insert(['email' => $user->email, 'token' => $code, 'created_at' => $date]);

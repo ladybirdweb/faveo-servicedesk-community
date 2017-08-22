@@ -85,7 +85,7 @@ class ReportController extends Controller
             } else {
                 $date1 = strtotime(date($format, strtotime('-30 days'.$date3)));
             }
-//            $help_topic = Help_topic::where('status', '=', '1')->min('id');
+            //            $help_topic = Help_topic::where('status', '=', '1')->min('id');
         }
 
         $return = '';
@@ -117,21 +117,21 @@ class ReportController extends Controller
                     $reopened = \DB::table('tickets')->select('reopened_at')->where('help_topic_id', '=', $help_topic)->where('reopened_at', 'LIKE', '%'.$thisDate.'%')->count();
                     $reopened_array = ['reopened' => $reopened];
                 }
-//                if ($request->input('overdue') && $request->input('overdue') == 'on') {
-//                    $overdue = Tickets::where('status', '=', 1)->where('isanswered', '=', 0)->where('dept_id', '=', $dept->id)->orderBy('id', 'DESC')->get();
-//                }
-//                        $open_array = ['open'=>$created1];
-//                        $closed_array = ['closed'=>$closed1];
-//                        $reopened_array = ['reopened'=>$reopened1];
+                //                if ($request->input('overdue') && $request->input('overdue') == 'on') {
+                //                    $overdue = Tickets::where('status', '=', 1)->where('isanswered', '=', 0)->where('dept_id', '=', $dept->id)->orderBy('id', 'DESC')->get();
+                //                }
+                //                        $open_array = ['open'=>$created1];
+                //                        $closed_array = ['closed'=>$closed1];
+                //                        $reopened_array = ['reopened'=>$reopened1];
                 $value = ['date' => $thisDate1];
-//                        if($open_array) {
+                //                        if($open_array) {
                 $value = array_merge($value, $open_array);
                 $value = array_merge($value, $closed_array);
                 $value = array_merge($value, $reopened_array);
                 $value = array_merge($value, ['inprogress' => $in_progress]);
-//                        } else {
-//                            $value = "";
-//                        }
+                //                        } else {
+                //                            $value = "";
+                //                        }
                 $array = array_map('htmlentities', $value);
                 $json = html_entity_decode(json_encode($array));
                 $return .= $json.',';
@@ -151,14 +151,14 @@ class ReportController extends Controller
                         $reopened_array = ['reopened' => $reopened1];
                         $reopened1 = 0;
                         $value = ['date' => $thisDate1];
-//                        if($open_array) {
+                        //                        if($open_array) {
                         $value = array_merge($value, $open_array);
                         $value = array_merge($value, $closed_array);
                         $value = array_merge($value, $reopened_array);
                         $value = array_merge($value, ['inprogress' => $in_progress]);
-//                        } else {
-//                            $value = "";
-//                        }
+                        //                        } else {
+                        //                            $value = "";
+                        //                        }
                         $array = array_map('htmlentities', $value);
                         $json = html_entity_decode(json_encode($array));
                         $return .= $json.',';
@@ -230,9 +230,9 @@ class ReportController extends Controller
                             }
                         }
 
-//                        } else {
-//                            $value = "";
-//                        }
+                        //                        } else {
+                        //                            $value = "";
+                        //                        }
                         $array = array_map('htmlentities', $value);
                         $json = html_entity_decode(json_encode($array));
                         $return .= $json.',';
@@ -240,7 +240,7 @@ class ReportController extends Controller
                 }
             }
 
-//            $value = ['date' => $thisDate];
+            //            $value = ['date' => $thisDate];
 //            if($open_array) {
 //                $value = array_merge($value,$open_array);
 //            }

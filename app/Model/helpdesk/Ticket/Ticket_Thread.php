@@ -24,9 +24,9 @@ class Ticket_Thread extends Model
         parent::delete();
     }
 
-//    public function setTitleAttribute($value) {
-//        $this->attributes['title'] = str_replace('"', "'", $value);
-//    }
+    //    public function setTitleAttribute($value) {
+    //        $this->attributes['title'] = str_replace('"', "'", $value);
+    //    }
 
     public function getTitleAttribute($value)
     {
@@ -36,7 +36,7 @@ class Ticket_Thread extends Model
     public function thread($content)
     {
         //         $porufi = $this->purify($content);
-//         dd($content,$porufi);
+        //         dd($content,$porufi);
         //return $content;
         return $this->purify($content);
     }
